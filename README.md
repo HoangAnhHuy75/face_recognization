@@ -1,4 +1,5 @@
 Các bước run :
+
 Bước 1. Thu thập dữ liệu khuôn mặt — build_dataset.py
 + Nhập id và tên trên giao diện
 + Webcam khởi động và hiển thị video trực tiếp
