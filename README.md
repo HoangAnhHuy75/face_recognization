@@ -1,14 +1,20 @@
--Vào build_dataset.py run
--Nhập tên của mình từ cổng console, nhấn phím s để chụp ảnh từ video, chụp từ 10 đến 20 ảnh, sau đó nhấn phím q để thoát video
--Ảnh sẽ được lưu vào thư mục dataset
+Các bước run :
+Bước 1. Thu thập dữ liệu khuôn mặt — build_dataset.py
++ Nhập id và tên trên giao diện
++ Webcam khởi động và hiển thị video trực tiếp
++ Đưa khuôn mặt vào khung hình và nhấn phím s (khoảng 10-15 tấm)
++ Nhấn q để thoát khỏi webcam
++ Các ảnh được lưu vào thư mục dataset
 
--Vào encode_faces.py run, đợi mã hóa hết tất cả ảnh trong thư mục dataset
--encode_faces dựa trên mô hình phát hiện khuôn mặt HOG của thư viện face_recognition dùng để mã hóa khuôn mặt 
--HOG là một thuật toán trích xuất đặc trưng từ hình ảnh bằng cách đếm số lượng gradient (độ dốc) theo các hướng khác nhau.
-Cách hoạt động của HOG:
-+Chia ảnh thành các ô nhỏ (cell) và khối (block).
-+Tính toán hướng của gradient cho từng pixel.
-+Xây dựng biểu đồ (histogram) của các hướng gradient trong từng ô.
-+Chuẩn hóa dữ liệu và sử dụng nó làm đầu vào cho một bộ phân loại (SVM) để xác định xem có khuôn mặt hay không.
--Sử dụng FaceNet (Deep Learning) để tạo ra vector 128 chiều đại diện cho khuôn mặt
--Vào recognize_faces_video run, hệ thống sẽ nhận diện khuôn mặt và hiện ra tên của mình
+Bước 2: 
++ Chương trình đọc tất cả ảnh trong thư mục dataset.
++ Phát hiện khuôn mặt trong từng ảnh.
++ Trích xuất đặc trưng khuôn mặt và chuyển thành vector số.
++ Lưu vector đặc trưng cùng tên người tương ứng để sử dụng khi nhận diện.
+
+Bước 3. Nhận diện khuôn mặt — recognize_faces_video.py
++ Webcam ghi hình trực tiếp.
++ Hệ thống phát hiện khuôn mặt trong từng khung hình.
++ Chuyển khuôn mặt thành vector encoding 128 chiều.
++ So sánh vector mới với các vector đã lưu bằng hàm so sánh của face_recognition.
++ Nếu khoảng cách nằm trong ngưỡng cho phép, hệ thống hiển thị tên người tương ứng; nếu không khớp, có thể hiển thị Unknown.
